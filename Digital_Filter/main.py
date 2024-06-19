@@ -40,16 +40,17 @@ for i in range(N+1):
 
 a = 0.99
 plt.ylim(-2,2)
-plt.plot(t, x, label="Original")
+linewidth = 2.5
+plt.plot(t, x, marker="", linestyle="-", linewidth=linewidth, label="Original", zorder=1)
 
 l = low_path_filter(x, a)
 #l = high_path_filter(x, a)
 #l = low_path_filter(l, a)
-plt.plot(t, l, label="low path filter")
+plt.plot(t, l, marker="", linestyle="-", linewidth=linewidth, label="low path filter", zorder=2)
 
 
 l = low_path_filter(l, a)
-plt.plot(t, l, label="2 times low path filter")
+plt.plot(t, l, marker="", linestyle="-", linewidth=linewidth, label="2 times low path filter", zorder=3)
 
 """
 low_path = low_path_filter(x, a)
