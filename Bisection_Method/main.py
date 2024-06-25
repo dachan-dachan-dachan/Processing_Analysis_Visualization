@@ -37,7 +37,7 @@ def x_on_0(func, d_erro, x_min, x_max):
 x_min = -1
 x_max = 2
 N = 1000
-d_erro = 0.1
+d_erro = 0.001
 
 x = []
 y = []
@@ -47,10 +47,10 @@ for i in range(N+1):
     x.append(tem)
     y.append(func(tem))
 
-markersize = 5
-plt.plot(x, y, marker="o", linestyle="", markersize=markersize, zorder=1)
+
+plt.plot(x, y, marker="p", linestyle="", markersize=3, zorder=1)
 x_on_zero = x_on_0(func, d_erro, x_min, x_max)
-plt.plot(x_on_zero, func(x_on_zero), marker="o", linestyle="", markersize=markersize*2, zorder=2)
+plt.plot(x_on_zero, func(x_on_zero), marker="x", linestyle="", markersize=10, zorder=2)
 plt.xlabel("X axis", fontsize=10)
 plt.ylabel("Y axis", fontsize=10)
 plt.xlim(x_min, x_max)
