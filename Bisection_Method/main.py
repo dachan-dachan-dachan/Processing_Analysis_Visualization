@@ -3,10 +3,11 @@ import math
 
 def func(x):
     y = math.sinh(x)
+    y = x**3 - x**2 - 0.5
     return y
 
 
-def x_on_0(func, d_error, x_min, x_max):
+def x_on_0(func, d_error, x_min, x_max):#二分法
     max_calc_times = 10000
     calc_times = 0
     while ( abs(x_min - x_max) > d_error ) and (calc_times < max_calc_times):
@@ -48,11 +49,14 @@ for i in range(N+1):
     y.append(func(tem))
 
 
-plt.plot(x, y, marker="p", linestyle="", markersize=3, zorder=1)
+plt.plot(x, y, marker="p", linestyle="", markersize=1, zorder=1)
 x_on_zero = x_on_0(func, d_error, x_min, x_max)
-plt.plot(x_on_zero, func(x_on_zero), marker="x", linestyle="", markersize=10, zorder=2)
+y_on_zeor = func(x_on_zero)
+plt.plot(x_on_zero, y_on_zeor, marker="x", linestyle="", markersize=8, zorder=2, color="red")
+plt.plot(x_on_zero, y_on_zeor, marker="+", linestyle="", markersize=12, zorder=2, color="red")
 plt.xlabel("X axis", fontsize=10)
 plt.ylabel("Y axis", fontsize=10)
 plt.xlim(x_min, x_max)
+#plt.axis("equal")
 plt.grid()
 plt.show()
