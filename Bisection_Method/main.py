@@ -14,8 +14,6 @@ def x_on_0(func, d_error, x_min, x_max):#二分法
         x_center = (x_min + x_max)/2
         y_on_center = func(x_center)
         if y_on_center == 0:
-            x_mim = x_center
-            x_max = x_center
             break
         elif y_on_center > 0:
             sign = 1
