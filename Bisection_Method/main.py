@@ -49,7 +49,7 @@ for i in range(N+1):
     y.append(func(tem))
 
 
-plt.plot(x, y, marker="p", linestyle="", markersize=1, zorder=1)
+plt.plot(x, y, marker="p", linestyle="", markersize=1, zorder=1, color="blue")
 x_on_zero = x_on_0(func, d_error, x_min, x_max)
 y_on_center = func(x_on_zero)
 plt.plot(x_on_zero, y_on_center, marker="x", linestyle="", markersize=8, zorder=2, color="red")
