@@ -3,7 +3,7 @@ import math
 
 def func(x):
     y = math.sinh(x)
-    y = x**3 - x**2 - 0.5
+    #y = x**3 - x**2 - 0.5
     return y
 
 
@@ -14,7 +14,7 @@ def x_on_0(func, d_error, x_min, x_max):#二分法
         x_center = (x_min + x_max)/2
         y_on_center = func(x_center)
         if y_on_center == 0:
-            x_mim = x_center
+            x_min = x_center
             x_max = x_center
             break
         elif y_on_center > 0:
@@ -36,7 +36,7 @@ def x_on_0(func, d_error, x_min, x_max):#二分法
 
 
 x_min = -1
-x_max = 2
+x_max = 1
 N = 1000
 d_error = 0.001
 
@@ -51,9 +51,9 @@ for i in range(N+1):
 
 plt.plot(x, y, marker="p", linestyle="", markersize=1, zorder=1)
 x_on_zero = x_on_0(func, d_error, x_min, x_max)
-y_on_zeor = func(x_on_zero)
-plt.plot(x_on_zero, y_on_zeor, marker="x", linestyle="", markersize=8, zorder=2, color="red")
-plt.plot(x_on_zero, y_on_zeor, marker="+", linestyle="", markersize=12, zorder=2, color="red")
+y_on_center = func(x_on_zero)
+plt.plot(x_on_zero, y_on_center, marker="x", linestyle="", markersize=8, zorder=2, color="red")
+plt.plot(x_on_zero, y_on_center, marker="+", linestyle="", markersize=12, zorder=2, color="red")
 plt.xlabel("X axis", fontsize=10)
 plt.ylabel("Y axis", fontsize=10)
 plt.xlim(x_min, x_max)
