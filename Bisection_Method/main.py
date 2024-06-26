@@ -2,7 +2,7 @@ import matplotlib.pyplot as plt
 import math
 
 def func(x):
-    y = math.sinh(x)
+    #y = math.sinh(x)
     y = x**3 - x**2 - 0.5
     return y
 
