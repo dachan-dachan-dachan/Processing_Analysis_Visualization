@@ -26,7 +26,9 @@ def func(x):
   return x*x*x
 
 y_d_true = [func(i) for i in x]
-y_d_Taylor = [Taylor_Expansion(2, 3, func, 1, i) for i in x]
+a = 2
+n = 3
+y_d_Taylor = [Taylor_Expansion(a, n, func, 1, i) for i in x]
 
 plt.plot(x, y_d_true, marker="", linestyle="-", label="True")
 plt.plot(x, y_d_Taylor, marker="", linestyle="--", label=f"Taylor {a=} {n=}")
