@@ -25,14 +25,14 @@ x = [i/T for i in range(x_min*T, x_max*T)]
 def func(x):
     return math.sin(math.pi*x)
 
-y_d_true = [func(i) for i in x]
+y_true = [func(i) for i in x]
 a = 1
 n = 5
 h = 0.1
-y_d_Taylor = [Taylor_Expansion(a, n, func, h, i) for i in x]
+y_Taylor = [Taylor_Expansion(a, n, func, h, i) for i in x]
 
-plt.plot(x, y_d_true, marker="", linestyle="-", linewidth=6, label="True")
-plt.plot(x, y_d_Taylor, marker="", linestyle=":", linewidth=6, label=f"Taylor {a=} {n=} {h=}")
+plt.plot(x, y_true, marker="", linestyle="-", linewidth=6, label="True")
+plt.plot(x, y_Taylor, marker="", linestyle=":", linewidth=6, label=f"Taylor {a=} {n=} {h=}")
 plt.xlim(x_min, x_max)
 plt.ylim(-2, 2)
 plt.grid()
