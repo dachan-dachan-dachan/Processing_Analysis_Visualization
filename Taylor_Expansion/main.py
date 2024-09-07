@@ -3,7 +3,7 @@ import matplotlib.pyplot as plt
 
 def Taylor_Expansion(a, n, func, h, x):#aは中心，nは展開する最大次数，hは微分時の幅
   
-  def nd_order_central_differences(xx, nd):
+  def nd_order_central_differences(xx, nd):#中心差分法の再帰関数
     if nd == 1:
       return ( func(xx+h) - func(xx-h) )/(2*h)
     else:
