@@ -3,37 +3,38 @@ import matplotlib.pyplot as plt
 
 def Taylor_Expansion(a, n, func, h, x):#aは中心，nは展開する最大次数，hは微分時の幅
   
-  def nd_order_central_differences(xx, nd):
-    if nd == 1:
-      return ( func(xx+h) - func(xx-h) )/(2*h)
-    else:
-      return ( nd_order_central_differences(xx+h, nd-1) - nd_order_central_differences(xx-h, nd-1) ) / (2*h)
+    def nd_order_central_differences(xx, nd):
+        if nd == 1:
+            return ( func(xx+h) - func(xx-h) )/(2*h)
+        else:
+            return ( nd_order_central_differences(xx+h, nd-1) - nd_order_central_differences(xx-h, nd-1) ) / (2*h)
   
-  n_Taylor_x_a = func(a)
-  for i in range(n):
-    n_Taylor_x_a += nd_order_central_differences(a, i+1) * math.pow(x-a, i+1) / math.factorial(i+1)
+    n_Taylor_x_a = func(a)
+    for i in range(n):
+        n_Taylor_x_a += nd_order_central_differences(a, i+1) * math.pow(x-a, i+1) / math.factorial(i+1)
 
-  return n_Taylor_x_a
+    return n_Taylor_x_a
 
 
 
 x_min = 0
-x_max = 10
-T = 10
+x_max = 3
+T = 100
 x = [i/T for i in range(x_min*T, x_max*T)]
 
 def func(x):
-  return math.pow(2, x)
+    return math.sin(math.pi*x)
 
 y_d_true = [func(i) for i in x]
-a = 5
-n = 3
+a = 1
+n = 5
 h = 0.1
 y_d_Taylor = [Taylor_Expansion(a, n, func, h, i) for i in x]
 
 plt.plot(x, y_d_true, marker="", linestyle="-", linewidth=6, label="True")
-plt.plot(x, y_d_Taylor, marker="", linestyle="--", linewidth=6, label=f"Taylor {a=} {n=} {h=}")
+plt.plot(x, y_d_Taylor, marker="", linestyle=":", linewidth=6, label=f"Taylor {a=} {n=} {h=}")
 plt.xlim(x_min, x_max)
+plt.ylim(-2, 2)
 plt.grid()
 plt.legend()
 plt.show()
