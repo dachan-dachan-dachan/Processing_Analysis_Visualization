@@ -3,7 +3,7 @@ import matplotlib.pyplot as plt
 
 def Taylor_Expansion(a, n, func, h, x):#aは中心，nは展開する最大次数，hは微分時の幅
   
-  def nd_order_central_differences(xx, nd):#中心差分法の再帰関数
+  def nd_order_central_differences(xx, nd):
     if nd == 1:
       return ( func(xx+h) - func(xx-h) )/(2*h)
     else:
@@ -17,21 +17,22 @@ def Taylor_Expansion(a, n, func, h, x):#aは中心，nは展開する最大次�
 
 
 
-x_min = -2
-x_max = 5
-T = 100
+x_min = 0
+x_max = 10
+T = 10
 x = [i/T for i in range(x_min*T, x_max*T)]
 
 def func(x):
-  return x*x*x
+  return math.pow(2, x)
 
 y_d_true = [func(i) for i in x]
-a = 2
+a = 5
 n = 3
-y_d_Taylor = [Taylor_Expansion(a, n, func, 1, i) for i in x]
+h = 0.1
+y_d_Taylor = [Taylor_Expansion(a, n, func, h, i) for i in x]
 
-plt.plot(x, y_d_true, marker="", linestyle="-", label="True")
-plt.plot(x, y_d_Taylor, marker="", linestyle="--", label=f"Taylor {a=} {n=}")
+plt.plot(x, y_d_true, marker="", linestyle="-", linewidth=6, label="True")
+plt.plot(x, y_d_Taylor, marker="", linestyle="--", linewidth=6, label=f"Taylor {a=} {n=} {h=}")
 plt.xlim(x_min, x_max)
 plt.grid()
 plt.legend()
