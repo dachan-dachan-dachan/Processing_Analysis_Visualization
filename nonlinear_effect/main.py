@@ -2,7 +2,7 @@ import math
 import matplotlib.pyplot as plt
 
 
-def Transfer_Function(u, a):
+def Transfer_Function(u):
     y = math.exp(u) - 1
     return y
 
@@ -16,13 +16,12 @@ if __name__ == "__main__":
     x_min = 0
     x_max = 100
     T = 1000
-    a = 0.8
-    A = 1.2
+    A = 0.8#1.2
     n = 3
 
     x = [i/T for i in range(int(x_min*T), int(x_max*T))]
     u = [func(i, A, n) for i in x]
-    y = [Transfer_Function(i, a) for i in u]
+    y = [Transfer_Function(i) for i in u]
     
     S = 0
     s = []
@@ -46,7 +45,7 @@ if __name__ == "__main__":
     max_y = max( max(y) , max(u) )
 
     tem = (A**2)/4
-    d = 1 / ( max_y - min_y )
+    d = (max_y - min_y)/50
     ytick = []
     ytick_label = []
     ytick_2 = []
