@@ -33,9 +33,9 @@ def main():
     ax_phase.set_xlim(x_min, x_max)
 
 
-    omega = []
     r = 1.2
     tem = x_min
+    omega = [tem]
     while tem < x_max:
         tem *= r
         omega.append(tem)
