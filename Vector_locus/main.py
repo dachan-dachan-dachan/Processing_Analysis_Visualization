@@ -60,8 +60,9 @@ def main():
         if 1 <= abs( Re_G[-1] + (Im_G[-1]*(1j)) ) and abs(G(tem*(1j))) <= 1 and Abs_one == None:
             Abs_one = [G(tem*(1j)).real , G(tem*(1j)).imag]
             plt.plot([Abs_one[0], 0], [Abs_one[1], 0], marker="o", linestyle="--", markersize=7, linewidth=1, color="black")
-            print(f"{Abs_one = } , angle = {math.degrees( math.atan2(Abs_one[1], Abs_one[0]) )} degree , PM = {math.degrees( math.atan2(Abs_one[1], Abs_one[0]) ) - 180}")
-
+            if angle < 0:
+                angle += 360
+            print(f"{Abs_one = } , {angle = } degree , PM = {angle - 180}")
     plt.plot(Re_G, Im_G, marker="", linestyle="-", linewidth=2, color="green")
 
 
