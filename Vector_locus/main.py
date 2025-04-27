@@ -28,7 +28,7 @@ def add_arrow(Re_G, Im_G, N_arrows=5, color="green"):
         if l <= s:
             s = 0
             plt.gca().annotate( "", xy=[Re_G[i+1], Im_G[i+1]], xytext=[Re_G[i], Im_G[i]],
-                    arrowprops=dict(shrink=0, width=5, headwidth=7, headlength=5, connectionstyle='arc3', facecolor=color, edgecolor=color)
+                    arrowprops=dict(shrink=0, width=1, headwidth=7, headlength=5, connectionstyle='arc3', facecolor=color, edgecolor=color)
                 )
 
 
