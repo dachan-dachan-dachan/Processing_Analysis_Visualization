@@ -7,11 +7,26 @@ def G(s):
     g = 1 / (T*s + 1)
     return g
 
-def Decibels(g):
-    return 20*math.log10(abs(g))
+def Decibels(omega):
+    de = [20*math.log10( abs( G( (1j)*i ) ) ) for i in omega]
+    return de
 
-def Phase(g):
-    return math.degrees( math.atan2(g.imag, g.real) )
+def Phase(omega):
+    g = G( (1j)*omega[0] )
+    ph = [math.degrees( math.atan2( g.imag, g.real) )]
+    for i in range(len(omega)-1):
+        g = G( (1j)*omega[i+1] )
+        ph_tem = math.degrees( math.atan2( g.imag, g.real) )
+        
+        if 180 < math.fabs( ph[-1] - ph_tem ):#前後の角度の差が180度より大きい場合．atan2の性質により不連続になってしまっている．
+            if ph[-1] < ph_tem:#下から上に一気に飛んだ場合
+                ph_tem -= 360
+            else:#上から下に一気に飛んだ場合
+                ph_tem += 360
+        
+        ph.append(ph_tem)
+
+    return ph
 
 
 
@@ -33,11 +48,11 @@ def main():
         omega.append(tem)
 
 
-    gain = [Decibels( G((1j)*i) ) for i in omega]
+    gain = Decibels(omega)
     ax_gain.plot(omega, gain)
 
 
-    phase = [Phase( G(1j*i) ) for i in omega]
+    phase = Phase(omega)
     ax_phase.plot(omega, phase)
 
 
