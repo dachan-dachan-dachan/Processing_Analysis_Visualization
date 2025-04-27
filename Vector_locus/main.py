@@ -13,6 +13,25 @@ def add_circle():
     y = np.sin(np.pi*omega)
     plt.plot(x, y, marker="", linestyle="--", linewidth=1, color="gray")
 
+    
+def add_arrow(Re_G, Im_G, N_arrows=5, color="green"):
+    l = 0
+    for i in range(len(Re_G)-1):
+        tem = math.sqrt( ((Re_G[i] - Re_G[i+1])**2) + ((Im_G[i] - Im_G[i+1])**2) )
+        l += tem
+    l /= N_arrows#矢印を追加する間隔
+
+    s = 0
+    for i in range(len(Re_G)-1):
+        tem = math.sqrt( ((Re_G[i] - Re_G[i+1])**2) + ((Im_G[i] - Im_G[i+1])**2) )
+        s += tem
+        if l <= s:
+            s = 0
+            plt.gca().annotate( "", xy=[Re_G[i+1], Im_G[i+1]], xytext=[Re_G[i], Im_G[i]],
+                    arrowprops=dict(shrink=0, width=5, headwidth=7, headlength=5, connectionstyle='arc3', facecolor=color, edgecolor=color)
+                )
+
+
 
 def main():
 
@@ -48,6 +67,7 @@ def main():
 
     plt.plot([-1], [0], marker="o", linestyle="", markersize=7, color="red")
     add_circle()
+    add_arrow(Re_G, Im_G, N_arrows=5, color="green")
     plt.gca().set_aspect("equal", adjustable="box")
     plt.xlabel("Re")
     plt.ylabel("Im")
