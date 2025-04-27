@@ -17,12 +17,13 @@ def Phase(omega):
     for i in range(len(omega)-1):
         g = G( (1j)*omega[i+1] )
         ph_tem = math.degrees( math.atan2( g.imag, g.real) )
-        
-        if 180 < math.fabs( ph[-1] - ph_tem ):#前後の角度の差が180度より大きい場合．atan2の性質により不連続になってしまっている．
+
+        n = round( math.fabs( ph[-1] - ph_tem ) / 360 )
+        if 0 < n:#前後の角度の差が180度より大きい場合．atan2の性質により不連続になってしまっている．
             if ph[-1] < ph_tem:#下から上に一気に飛んだ場合
-                ph_tem -= 360
+                ph_tem = - (360*n - ph_tem)
             else:#上から下に一気に飛んだ場合
-                ph_tem += 360
+                ph_tem = (360*n + ph_tem)
         
         ph.append(ph_tem)
 
