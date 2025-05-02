@@ -56,8 +56,7 @@ def main():
     phase = Phase(omega)
     ax_phase.plot(omega, phase)
 
-
-    #軸の設定
+    #軸，罫線の設定
     ax_gain.set_xscale("log")
     ax_gain.set_ylabel("Gain [dB]")
     ax_gain.grid(which="major", linestyle="--")
@@ -69,44 +68,18 @@ def main():
     ax_phase.grid(which="major", linestyle="--")
     ax_phase.grid(axis="x", which="minor", linestyle="--")
 
-
-    #縦軸の上限下限調整
+    #最大・最小，罫線の間隔の設定
     d = 20
-    y_lim_max = d * ( ( max(gain) // d ) + 1 )
-    y_lim_min = d * ( min(gain) // d )
-    width = y_lim_max - y_lim_min
-    tem_y = y_lim_min
-    tem = [tem_y]
-    while tem_y < y_lim_max:
-        tem_y += d
-        tem.append(tem_y)
-
-    if y_lim_max - max(gain) < 0.1 * width:
-        y_lim_max += 0.1 * width
-    if  min(gain) - y_lim_min < 0.1 * width:
-        y_lim_min -= 0.1 * width
-
-    ax_gain.set_ylim(y_lim_min, y_lim_max)
-    ax_gain.set_yticks(tem)
-
-
+    y_max = d*( int(max(gain))//d ) + d
+    y_min = d*( int(min(gain))//d )
+    ax_gain.set_ylim( y_min, y_max )
+    ax_gain.set_yticks( [i for i in range( y_min, y_max+d, d )] )
+    
     d = 45
-    y_lim_max = d * ( ( max(phase) // d ) + 1 )
-    y_lim_min = d * ( min(phase) // d )
-    width = y_lim_max - y_lim_min
-    tem_y = y_lim_min
-    tem = [tem_y]
-    while tem_y < y_lim_max:
-        tem_y += d
-        tem.append(tem_y)
-
-    if y_lim_max - max(phase) < 0.1 * width:
-        y_lim_max += 0.1 * width
-    if  min(phase) - y_lim_min < 0.1 * width:
-        y_lim_min -= 0.1 * width
-
-    ax_phase.set_ylim(y_lim_min, y_lim_max)
-    ax_phase.set_yticks(tem)
+    y_max = d*( int(max(phase))//d ) + d
+    y_min = d*( int(min(phase))//d )
+    ax_phase.set_ylim( y_min, y_max )
+    ax_phase.set_yticks( [i for i in range( y_min, y_max+d, d )] )
 
 
     plt.show()
